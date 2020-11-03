@@ -17,16 +17,16 @@ export default (appInfo: EggAppInfo) => {
       database: "read-write",
       host: "remote",
       port: 10802,
-      username: "read",
-      password: "slave1!read",
+      username: "xxxxx",
+      password: "xxxxx",
     },
     write: {
       dialect: "mysql",
       database: "read-write",
       host: "remote",
       port: 10801,
-      username: "write",
-      password: "master1!write",
+      username: "xxxxx",
+      password: "xxxxx",
     },
   };
 
