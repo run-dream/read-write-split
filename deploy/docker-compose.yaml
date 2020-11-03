@@ -1,0 +1,40 @@
+version: "3"
+services:
+  mysqlmaster:
+    restart: always
+    image: docker.io/mysql:5.7.19
+    container_name: mysqlmaster
+    environment:
+      MYSQL_ROOT_PASSWORD: xxxxx
+      MYSQL_USER: xxxxx
+      MYSQL_PASSWORD: xxxxx
+      MYSQL_DATABASE: read-write
+    volumes:
+      - ./master/db:/var/lib/mysql
+      - ./master/conf/my.cnf:/etc/my.cnf
+      - ./master/init:/docker-entrypoint-initdb.d
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 10801:3306
+    networks:
+      - mysql
+  mysqlslave:
+    restart: always
+    image: docker.io/mysql:5.7.19
+    container_name: mysqlslave
+    environment:
+      MYSQL_ROOT_PASSWORD: xxxxx
+      MYSQL_USER: xxxxx
+      MYSQL_PASSWORD: xxxxx
+      MYSQL_DATABASE: read-write
+    volumes:
+      - ./slave/db:/var/lib/mysql
+      - ./slave/conf/my.cnf:/etc/my.cnf
+      - ./slave/init:/docker-entrypoint-initdb.d
+    ports:
+      - 10802:3307
+    networks:
+      - mysql
+
+networks:
+  mysql:
